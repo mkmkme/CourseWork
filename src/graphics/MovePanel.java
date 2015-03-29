@@ -35,20 +35,20 @@ public class MovePanel extends JPanel {
     public void setSet() {
         isSet = false;
     }
-    
+
     public void move(int direction) {
         switch (direction) {
             case RIGHT:
-                x+=2;
+                x += 2;
                 break;
             case DOWN:
-                y+=2;
+                y += 2;
                 break;
             case LEFT:
-                x-=2;
+                x -= 2;
                 break;
             case UP:
-                y-=2;
+                y -= 2;
                 break;
         }
     }

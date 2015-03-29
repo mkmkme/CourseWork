@@ -30,7 +30,7 @@ public class City {
             city[i][j] = city[j][i] = new Road(ln - ln % 10, 0);
         }
         for (int i = 7; i < size - 1; i += 8) {
-            city[i][ i + 1] = city[i + 1][i] = null;
+            city[i][i + 1] = city[i + 1][i] = null;
         }
         newSpeed();
     }
@@ -61,8 +61,8 @@ public class City {
                     if (city[i][j] != null && city[j][i] == null) {
                         city[j][i] = city[i][j];
                     } else if (city[i][j] != null && city[j][i] != null) {
-                        city[i][j].lengthRoad = city[j][i].lengthRoad =
-                                (city[i][j].lengthRoad + city[j][i].lengthRoad) / 2;
+                        city[i][j].lengthRoad = city[j][i].lengthRoad
+                                = (city[i][j].lengthRoad + city[j][i].lengthRoad) / 2;
                     }
                 }
             }
@@ -93,12 +93,12 @@ public class City {
 
     public void newSpeed() {
         Random rand = new Random();
-        for (int i = 0; i < city.length; i++) {
+        for (Road[] city1 : city) {
             for (int j = 0; j < city.length; j++) {
-                if (city[i][j] != null) {
+                if (city1[j] != null) {
                     int th = rand.nextInt(51) + 10;
                     th = th >= 60 ? 60 : th;
-                    city[i][j] = new Road(city[i][j].lengthRoad, th - th % 5);
+                    city1[j] = new Road(city1[j].lengthRoad, th - th % 5);
                 }
             }
         }
@@ -106,18 +106,18 @@ public class City {
 
     public void newSpeedReally() {
         Random rand = new Random();
-        for (int i = 0; i < city.length; i++) {
+        for (Road[] city1 : city) {
             for (int j = 0; j < city.length; j++) {
-                if (city[i][j] != null) {
+                if (city1[j] != null) {
                     int th;
                     if (rand.nextBoolean()) {
-                        th = city[i][j].speed + 10;
+                        th = city1[j].speed + 10;
                     } else {
-                        th = city[i][j].speed - 10;
+                        th = city1[j].speed - 10;
                     }
                     th = th >= 60 ? 60 : th;
                     th = th <= 0 ? 5 : th;
-                    city[i][j] = new Road(city[i][j].lengthRoad, th);
+                    city1[j] = new Road(city1[j].lengthRoad, th);
                 }
             }
         }
@@ -196,10 +196,10 @@ public class City {
         if (city[i][j] != null) {
             return String.valueOf(city[i][j].speed);// + "-" + city[i][j].length;
         }
-        return "null";
+        return null;
     }
 
-    public City test(int count){
+    public City test(int count) {
         City city = new City(count);
         city.newCity();
         city.printInfo();

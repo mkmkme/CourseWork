@@ -19,7 +19,7 @@ import javax.swing.SwingUtilities;
 import mtj.City;
 import mtj.Time;
 
-public class GraphicsTestCity extends JFrame {
+public final class GraphicsTestCity extends JFrame {
 
     static Time time;
     static City city;
@@ -97,6 +97,7 @@ public class GraphicsTestCity extends JFrame {
         getContentPane().add(graphComponent);
 
         graphComponent.getGraphControl().addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseReleased(MouseEvent e) {
                 Object cell = graphComponent.getCellAt(e.getX(), e.getY());
                 if (cell != null && isVertex(cell)) {
@@ -228,7 +229,6 @@ public class GraphicsTestCity extends JFrame {
                 try {
                     Thread.sleep(55);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
                 pixelPath++;
                 if (step == 1 || step == 3) {
@@ -268,9 +268,9 @@ public class GraphicsTestCity extends JFrame {
             case -1:
                 return 3;
             case 1:
-                return  1;
+                return 1;
             case -8:
-                return  0;
+                return 0;
         }
         return -1;
     }
